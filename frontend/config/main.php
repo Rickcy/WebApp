@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute'=>'front',
     'modules' => [
         'front' => [
             'class' => 'app\modules\front\MainModule',
@@ -53,10 +54,15 @@ return [
                 'port'       => '465',
                 'smtpsecure' => 'ssl',
                 'smtpauth'   => true,
-                'username'   => 'mysmtplogin@example.ru',
-                'password'   => 'mYsmTpPassword',
+                'username'   => 'Rickcy@yandex.ru',
+                'password'   => 'Rickcy27',
+                'isHtml'     => true,
+                'charset'    => 'UTF-8'
                 ]
-            ]
+            ],
+        'common' =>[
+            'class' => 'frontend\component\Common'
+        ]
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

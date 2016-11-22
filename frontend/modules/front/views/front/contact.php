@@ -25,7 +25,7 @@ use yii\captcha\Captcha;
                              {input}
                             </div>
                         </div>',
-            'captchaAction'=>Url::to(['../../../front/front/captcha'])
+            'captchaAction'=>Url::to(['/front/front/captcha'])
         ]); ?>
         <?=Html::submitButton('Send Message',['class'=>'btn btn-success']);?>
 

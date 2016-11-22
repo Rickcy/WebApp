@@ -43,7 +43,7 @@
 
 <!-- Header Starts -->
 <div class="header">
-<a href="index.html" ><img src="/frontend/web/images/logo.png"  alt="Realestate"></a>
+<a href="index.html" ><img src="/images/logo.png"  alt="Realestate"></a>
 
               <ul class="pull-right">
                 <li><a href="buysalerent.html" >Buy</a></li>

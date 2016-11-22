@@ -5,6 +5,7 @@ namespace app\modules\front\controllers;
 
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use Yii;
 use yii\web\Controller;
 
 class FrontController extends Controller
@@ -30,7 +31,7 @@ class FrontController extends Controller
 
     public function actionRegister(){
         $model = new SignupForm;
-        if($model->load(\Yii::$app->request->post()) && $model->validate()){
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
             print_r($model->getAttributes());
             die;
         }
@@ -39,6 +40,13 @@ class FrontController extends Controller
 
     public function actionContact(){
         $model = new ContactForm();
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $body ='<div>Body : <b>'.$model->body.'</b></div>';
+            $body .='<div>Email : <b>'.$model->email.'</b></div>';
+            Yii::$app->common->sendMail($model->subject,$body);
+            print "Send Success";
+            die();
+        }
         return $this->render('contact',['model'=>$model]);
     }
 }
