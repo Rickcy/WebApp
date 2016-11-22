@@ -10,6 +10,7 @@ use yii\bootstrap\Nav;
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title><?= Html::encode($this->title) ?></title>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <?= Html::csrfMetaTags() ?>
@@ -23,7 +24,7 @@ use yii\bootstrap\Nav;
 ?>
 
 <!-- Header Starts -->
-  <? echo $this->render("//common/head") ?>
+<?=$this->render("//common/head")?>
 <!-- #Header Starts -->
 
 <div class="inside-banner">

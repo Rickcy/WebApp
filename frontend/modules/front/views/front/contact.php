@@ -3,6 +3,9 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\captcha\Captcha;
+
+$this->title = 'Contact';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 

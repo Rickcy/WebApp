@@ -32,7 +32,7 @@ class FrontController extends Controller
     public function actionRegister(){
         $model = new SignupForm;
         if($model->load(Yii::$app->request->post()) && $model->validate()){
-            print_r($model->getAttributes());
+            print($model->getAttributes());
             die;
         }
         return $this->render('register',['model' => $model]);

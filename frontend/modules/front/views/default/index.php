@@ -1,6 +1,9 @@
 
 <?
 use yii\helpers\Html;
+
+$this->title = 'MyWeb';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="">
 
@@ -105,7 +108,7 @@ use yii\helpers\Html;
 
                             <?=
                             Html::dropDownList('buy','',['Buy'=>'Buy','Rent'=>'Rent','Sale'=>'Sale'
-                            ],['class'=>'form-control','prompt'=>'Buy'])
+                            ],['class'=>'form-control'])
                             ?>
 
                         </div>
@@ -116,7 +119,7 @@ use yii\helpers\Html;
                                 '$200,000 - $250,000'=>'$200,000 - $250,000',
                                 '$250,000 - $300,000'=>'$250,000 - $300,000',
                                 '$300,000 - above'=>'$300,000 - above'
-                            ],['class'=>'form-control','prompt'=>'Price'])
+                            ],['class'=>'form-control'])
                             ?>
 
 
@@ -125,7 +128,7 @@ use yii\helpers\Html;
 
                             <?=
                             Html::dropDownList('buy','',['Property'=>'Property','Apartment'=>'Apartment','Building'=>'Building','Office Space'=>'Office Space'
-                            ],['class'=>'form-control','prompt'=>'Property'])
+                            ],['class'=>'form-control'])
                             ?>
 
                         </div>
