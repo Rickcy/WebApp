@@ -2,6 +2,7 @@
 
 namespace app\modules\front\controllers;
 
+use frontend\component\Common;
 use yii\web\Controller;
 
 /**
@@ -17,6 +18,12 @@ class DefaultController extends Controller
     { $this->layout='front';
 
         return $this->render('index');
+    }
+
+    public function actionEvent(){
+        $component = new Common();
+        $component->on(Common::EVENT_NOTIFY,[$component,'notifyAdmin']);
+        $component->sendMail('kuden.adn.ko@gmail.com','Test','Test','Test');
     }
 
 }
