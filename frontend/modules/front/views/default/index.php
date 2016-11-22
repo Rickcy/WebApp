@@ -1,4 +1,7 @@
 
+<?
+use yii\helpers\Html;
+?>
 <div class="">
 
 
@@ -88,40 +91,58 @@
         <h3>Buy, Sale & Rent</h3>
         <div class="searchbar">
             <div class="row">
+                <?=
+                Html::beginForm()
+                ?>
                 <div class="col-lg-6 col-sm-6">
-                    <input type="text" class="form-control" placeholder="Search of Properties">
+
+                    <?=
+                    Html::textInput('search','',['class'=>'form-control','placeholder'=>'Search of Properties'])
+                    ?>
                     <div class="row">
+
                         <div class="col-lg-3 col-sm-3 ">
-                            <select class="form-control">
-                                <option>Buy</option>
-                                <option>Rent</option>
-                                <option>Sale</option>
-                            </select>
+
+                            <?=
+                            Html::dropDownList('buy','',['Buy'=>'Buy','Rent'=>'Rent','Sale'=>'Sale'
+                            ],['class'=>'form-control','prompt'=>'Buy'])
+                            ?>
+
                         </div>
                         <div class="col-lg-3 col-sm-4">
-                            <select class="form-control">
-                                <option>Price</option>
-                                <option>$150,000 - $200,000</option>
-                                <option>$200,000 - $250,000</option>
-                                <option>$250,000 - $300,000</option>
-                                <option>$300,000 - above</option>
-                            </select>
+                            <?=
+                            Html::dropDownList('buy','',[
+                                '$150,000 - $200,000'=>'$150,000 - $200,000',
+                                '$200,000 - $250,000'=>'$200,000 - $250,000',
+                                '$250,000 - $300,000'=>'$250,000 - $300,000',
+                                '$300,000 - above'=>'$300,000 - above'
+                            ],['class'=>'form-control','prompt'=>'Price'])
+                            ?>
+
+
                         </div>
                         <div class="col-lg-3 col-sm-4">
-                            <select class="form-control">
-                                <option>Property</option>
-                                <option>Apartment</option>
-                                <option>Building</option>
-                                <option>Office Space</option>
-                            </select>
+
+                            <?=
+                            Html::dropDownList('buy','',['Property'=>'Property','Apartment'=>'Apartment','Building'=>'Building','Office Space'=>'Office Space'
+                            ],['class'=>'form-control','prompt'=>'Property'])
+                            ?>
+
                         </div>
                         <div class="col-lg-3 col-sm-4">
-                            <button class="btn btn-success"  onclick="window.location.href='buysalerent.html'">Find Now</button>
+                          
+                            <?=
+                            Html::submitButton('Find Now',['class'=>'btn btn-success'])
+                            ?>
                         </div>
                     </div>
 
-
                 </div>
+
+
+                <?=
+                Html::endForm()
+                ?>
                 <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
                     <p>Join now and get updated with all the properties deals.</p>
                     <button class="btn btn-info"   data-toggle="modal" data-target="#loginpop">Login</button>        </div>
