@@ -15,6 +15,9 @@ return [
     'modules' => [
         'front' => [
             'class' => 'app\modules\front\MainModule',
+        ],
+        'cabinet' => [
+            'class' => 'app\modules\cabinet\Module',
         ]
     ],
     'components' => [
@@ -26,6 +29,7 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'loginUrl'=>'/front/front/login'
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend

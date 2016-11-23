@@ -1,13 +1,13 @@
 <?php
 
 
-
+use yii\bootstrap\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\FrontAssets;
-use common\widgets\Alert;
+
 
 FrontAssets::register($this) ?>
 <?php $this->beginPage() ?>
@@ -24,6 +24,16 @@ FrontAssets::register($this) ?>
 
 <body>
 <?php $this->beginBody() ?>
+
+
+<? if(Yii::$app->session->hasFlash('success')):?>
+  <? $success = Yii::$app->session->getFlash('success') ?>
+    <?=Alert::widget([
+      'options' =>[
+      'class'=>'alert-success'],
+    'body'=>$success
+  ])?>
+<?endif?>
 
 
 <?=$this->render("//common/head")?>

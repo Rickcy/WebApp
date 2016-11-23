@@ -1,4 +1,5 @@
 <?
+use yii\bootstrap\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 
@@ -22,7 +23,14 @@ use yii\bootstrap\Nav;
 <?
  $this->beginBody();
 ?>
-
+<? if(Yii::$app->session->hasFlash('success')):?>
+    <? $success = Yii::$app->session->getFlash('success') ?>
+    <?=Alert::widget([
+        'options' =>[
+            'class'=>'alert-success'],
+        'body'=>$success
+    ])?>
+<?endif?>
 <!-- Header Starts -->
 <?=$this->render("//common/head")?>
 <!-- #Header Starts -->

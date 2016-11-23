@@ -3,6 +3,7 @@
 
 namespace app\modules\front\controllers;
 
+use common\models\LoginForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use Yii;
@@ -30,12 +31,31 @@ class FrontController extends Controller
     }
 
     public function actionRegister(){
-        $model = new SignupForm;
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            print($model->getAttributes());
-            die;
+        $model = new SignupForm();
+        if($model->load(Yii::$app->request->post()) && $model->signup()){
+                $this->goBack();
+            Yii::$app->session->setFlash('success','Register Success');
+        }else {
+            return $this->render('register', ['model' => $model]);
         }
-        return $this->render('register',['model' => $model]);
+    }
+
+    public function actionLogin(){
+            if(!Yii::$app->user->isGuest){
+                return $this->goHome();
+            }
+        $model = new LoginForm();
+        if($model->load(Yii::$app->request->post()) && $model->login()){
+            return $this->goBack();
+        }else {
+            return $this->render('login',['model'=>$model]);
+        }
+    }
+
+
+    public function actionLogout(){
+        Yii::$app->user->logout();
+        return $this->goHome();
     }
 
     public function actionContact(){

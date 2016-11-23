@@ -1,15 +1,36 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User11
- * Date: 23.11.2016
- * Time: 11:39
- */
+
 
 namespace common\controllers;
 
 
-class AuthController
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
+
+class AuthController extends Controller
 {
+    public function behaviors()
+    {
+        $behaviors =[
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'rules'=>[
+                    [
+                        'allow'=>true,
+                        'roles'=>['@']
+                    ]
+                ]
+            ],
+            'verbs'=>[
+                'class'=>VerbFilter::className(),
+                'actions'=>[
+                    'delete'=>['post']
+                ]
+            ]
+        ];
+        return $behaviors;
+    }
+
 
 }
