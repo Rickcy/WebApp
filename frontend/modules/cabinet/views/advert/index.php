@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'price',
             'address',
-            
             'bedroom',
              'livingroom',
              'parking',
@@ -39,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sold',
             // 'type',
             // 'recomend',
-            // 'created_at',
-            // 'updated_at',
+             'created_at:date',
+            // 'updated_at:date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

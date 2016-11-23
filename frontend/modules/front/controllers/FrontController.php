@@ -3,10 +3,14 @@
 
 namespace app\modules\front\controllers;
 
+use common\models\Advert;
 use common\models\LoginForm;
+use frontend\component\Common;
+use frontend\filters\FilterAdvert;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use Yii;
+use yii\base\DynamicModel;
 use yii\web\Controller;
 
 class FrontController extends Controller
@@ -24,7 +28,14 @@ class FrontController extends Controller
            ]
        ];
     }
-
+    public function behaviors(){
+        return [
+            [
+                'only' => ['view-advert'],
+                'class' => FilterAdvert::className(),
+            ]
+        ];
+    }
     public function actionIndex(){
 
         return $this->render('index');
@@ -68,5 +79,46 @@ class FrontController extends Controller
             die();
         }
         return $this->render('contact',['model'=>$model]);
+    }
+
+    public function actionViewAdvert($id){
+        $model = Advert::findOne($id);
+
+        $data = ['name', 'email', 'text'];
+        $model_feedback = new DynamicModel($data);
+        $model_feedback->addRule('name','required');
+        $model_feedback->addRule('email','required');
+        $model_feedback->addRule('text','required');
+        $model_feedback->addRule('email','email');
+
+
+        if(Yii::$app->request->isPost) {
+            if ($model_feedback->load(Yii::$app->request->post()) && $model_feedback->validate()){
+
+                Yii::$app->common->sendMail('Subject Advert',$model_feedback->text);
+            }
+
+        }
+
+        $user = $model->user;
+        $images = Common::getImageAdvert($model,false);
+
+        $current_user = ['email' => '', 'username' => ''];
+
+        if(!Yii::$app->user->isGuest){
+
+            $current_user['email'] = Yii::$app->user->identity->email;
+            $current_user['username'] = Yii::$app->user->identity->username;
+
+        }
+
+        return $this->render('view_advert',[
+            'model' => $model,
+            'model_feedback' => $model_feedback,
+            'user' => $user,
+            'images' =>$images,
+            'current_user' => $current_user
+        ]);
+
     }
 }

@@ -50,21 +50,23 @@ use yii\bootstrap\Nav;
 <div class="container">
 
 <!-- Header Starts -->
-<div class="header">
-<a href="index.html" ><img src="/images/logo.png"  alt="Realestate"></a>
-    <?
-
-    $menuItems = [
-        ['label' => 'Buy', 'url' => ['/site/index']],
-        ['label' => 'Sale', 'url' => ['/site/about']],
-        ['label' => 'Rent', 'url' => ['/site/contact']],
-    ];
-    echo Nav::widget([
-        'options' => ['class' => 'pull-right'],
-        'items' => $menuItems,
-    ]);
-    ?>
-
-</div>
+    <div class="header">
+        <a href="/" ><img src="/images/logo.png"  alt="Realestate"></a>
+        <?
+        $menuItems = [];
+        $guest = Yii::$app->user->isGuest;
+        if($guest) {
+            $menuItems[] =  ['label' => 'Login', 'url' => '#', 'linkOptions' => ['data-target' => '#loginpop', 'data-toggle' => "modal"]];
+        }
+        else{
+            $menuItems[] =  ['label' => 'Manager adverts', 'url' => ['/cabinet/advert']];
+            $menuItems[] = ['label' => 'Logout',  'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']];
+        }
+        echo Nav::widget([
+            'options' => ['class' => 'pull-right'],
+            'items' => $menuItems,
+        ]);
+        ?>
+    </div>
 <!-- #Header Starts -->
 </div>

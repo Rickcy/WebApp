@@ -19,11 +19,24 @@ class DefaultController extends Controller
     {
         $this->layout = "front";
         $query = new Query();
-        $command = $query->from('advert')->orderBy('id desc')->limit(5);
+        $query_advert = $query->from('advert')->orderBy('id desc');
+        $command = $query_advert->limit(5);
         $result_general = $command->all();
         $count_general = $command->count();
 
-        return $this->render('index',['result_general' => $result_general, 'count_general' => $count_general]);
+        $featured = $query_advert->limit(15)->all();
+        $recommend_query  = $query_advert->where("recomend= 1")->limit(5);
+        $recommend = $recommend_query->all();
+        $recommend_count = $recommend_query->count();
+
+        return $this->render('index',[
+            'result_general' => $result_general,
+            'count_general' => $count_general,
+            'featured' => $featured,
+            'recommend' => $recommend,
+            'recommend_count' => $recommend_count
+
+        ]);
     }
 
     public function actionEvent(){
