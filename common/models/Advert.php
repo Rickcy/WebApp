@@ -92,6 +92,12 @@ class Advert extends \yii\db\ActiveRecord
 
 
 
+
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'fk_agent_detail']);
+    }
+
+
     public function afterValidate()
     {
         $this->fk_agent_detail =Yii::$app->user->identity->id;
@@ -99,7 +105,7 @@ class Advert extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        Yii::$app->session->set('id',$this->id);
+        Yii::$app->locator->cache->set('id',$this->id);
     }
 
 

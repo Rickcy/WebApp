@@ -136,29 +136,34 @@ class AdvertController extends AuthController
     }
 
     public function actionStep2(){
-            $id =Yii::$app->session->get('id');
-            $model = Advert::findOne($id);
-            $image = [];
-        if($general_image =$model->general_image){
-            $image[]='<img src="uploads/adverts/' .$model->id. '/general/small_'.$general_image .'" width=250';
+        $id = Yii::$app->locator->cache->get('id');
+        $model = Advert::findOne($id);
+        $image = [];
+        if($general_image = $model->general_image){
+            $image[] =  '<img src="/uploads/adverts/' . $model->id . '/general/small_' . $general_image . '" width=250>';
         }
+
         if(Yii::$app->request->isPost){
             $this->redirect(Url::to(['advert/']));
         }
 
-        $path =Yii::getAlias("@frontend/web/uploads/adverts".$model->id);
-        $images_add=[];
-        try{
-            if(is_dir($path)){
+        $path = Yii::getAlias("@frontend/web/uploads/adverts/".$model->id);
+        $images_add = [];
+
+        try {
+            if(is_dir($path)) {
                 $files = FileHelper::findFiles($path);
 
-                foreach ($files as $file){
-                    if(strstr($file,'small_') && !strstr($file,'general')){
-                        $images_add[]='<img src="/uploads/adverts/' .$model->id . '/'.basename($file).'" width=250>';
+                foreach ($files as $file) {
+                    if (strstr($file, "small_") && !strstr($file, "general")) {
+                        $images_add[] = '<img src="/uploads/adverts/' . $model->id . '/' . basename($file) . '" width=250>';
                     }
                 }
             }
-        } catch(\yii\base\Exception $e){}
+        }
+        catch(Exception $e){}
+
+
         return $this->render("step2",['model' => $model,'image' => $image, 'images_add' => $images_add]);
     }
 
