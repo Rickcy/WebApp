@@ -16,11 +16,12 @@ use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\web\View;
 
 /**
  * AdvertController implements the CRUD actions for Advert model.
  */
-class AdvertController extends AuthController
+class AdvertController extends AuthController 
 {
     /**
      * @inheritdoc
@@ -29,6 +30,9 @@ class AdvertController extends AuthController
 
     public $layout ='inner';
 
+    public function init(){
+        Yii::$app->view->registerJsFile('http://maps.googleapis.com/maps/api/js?key=AIzaSyBFAVCfqWxY2ZXYIMNbcoEKQnYxS7Udnkk',['position' => View::POS_HEAD]);
+    }
 
     /**
      * Lists all Advert models.

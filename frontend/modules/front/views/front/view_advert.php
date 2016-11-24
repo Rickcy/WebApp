@@ -3,6 +3,9 @@ use frontend\component\Common;
 use frontend\widgets\HotWidget;
 use yii\bootstrap\ActiveForm;
 
+
+$this->title = Common::getTitleAdvert($model);
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-lg-3 col-sm-4 hidden-xs">
@@ -59,9 +62,12 @@ use yii\bootstrap\ActiveForm;
                 <div class="spacer"><h4><span class="glyphicon glyphicon-th-list"></span> Properties Detail</h4>
                     <p> <?=$model->description ?></p>
                 </div>
-<!--                <div><h4><span class="glyphicon glyphicon-map-marker"></span> Location</h4>-->
-<!--                    <div class="well"><iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="../../../maps.google.com/fi000001.002642&t=m&z=14&output=embed" ></iframe></div>-->
-<!--                </div>-->
+                <div><h4><span class="glyphicon glyphicon-map-marker"></span> Location</h4>
+                    <div class="well">
+                        <? echo $map->display(); ?>
+
+                    </div>
+                </div>
 
             </div>
             <div class="col-lg-4">

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                 <div class="sl-slide-inner">
                     <div class="bg-img" style="background-image: url('<?=Common::getImageAdvert($row)[0] ?>')")"></div>
-                <h2><a href="#"><?=Common::getTitleAdvert($row) ?></a></h2>
+                <h2><a href="<?=\yii\helpers\Url::to('front/front/view-advert?id='.$row['id']) ?>"><?=Common::getTitleAdvert($row) ?></a></h2>
                 <blockquote>
                     <p class="location"><span class="glyphicon glyphicon-map-marker"></span> <?=$row['address'] ?></p>
                     <p><?=Common::substr($row['description']) ?></p>
@@ -62,69 +62,42 @@ $this->params['breadcrumbs'][] = $this->title;
         <h3>Buy, Sale & Rent</h3>
         <div class="searchbar">
             <div class="row">
-                <?=
-                Html::beginForm()
-                ?>
+                <?=Html::beginForm(\yii\helpers\Url::to('front/front/find/'),'get') ?>
                 <div class="col-lg-6 col-sm-6">
-
-                    <?=
-                    Html::textInput('search','',['class'=>'form-control','placeholder'=>'Search of Properties'])
-                    ?>
+                    <?=Html::textInput('propert', '', ['class' => 'form-control']) ?>
                     <div class="row">
-
-                        <div class="col-lg-3 col-sm-3 ">
-
-                            <?=
-                            Html::dropDownList('buy','',['Buy'=>'Buy','Rent'=>'Rent','Sale'=>'Sale'
-                            ],['class'=>'form-control'])
-                            ?>
-
-                        </div>
                         <div class="col-lg-3 col-sm-4">
-                            <?=
-                            Html::dropDownList('buy','',[
-                                '$150,000 - $200,000'=>'$150,000 - $200,000',
-                                '$200,000 - $250,000'=>'$200,000 - $250,000',
-                                '$250,000 - $300,000'=>'$250,000 - $300,000',
-                                '$300,000 - above'=>'$300,000 - above'
-                            ],['class'=>'form-control'])
-                            ?>
-
-
+                            <?=Html::dropDownList('price', '',[
+                                '150000-200000' => '$150,000 - $200,000',
+                                '200000-250000' => '$200,000 - $250,000',
+                                '250000-300000' => '$250,000 - $300,000',
+                                '300000' =>'$300,000 - above',
+                            ],['class' => 'form-control']) ?>
                         </div>
                         <div class="col-lg-3 col-sm-4">
 
-                            <?=
-                            Html::dropDownList('buy','',['Property'=>'Property','Apartment'=>'Apartment','Building'=>'Building','Office Space'=>'Office Space'
-                            ],['class'=>'form-control'])
-                            ?>
-
+                            <?=Html::dropDownList('apartment', '',[
+                                'Apartment',
+                                'Building',
+                                'Office Space',
+                            ],['class' => 'form-control']) ?>
                         </div>
                         <div class="col-lg-3 col-sm-4">
-                          
-                            <?=
-                            Html::submitButton('Find Now',['class'=>'btn btn-success'])
-                            ?>
+                            <?=Html::submitButton('Find Now', ['class' => 'btn btn-success']) ?>
                         </div>
                     </div>
+                    <?=Html::endForm() ?>
 
                 </div>
-
-
-                <?=
-                Html::endForm()
-                ?>
                 <?
                 if(Yii::$app->user->isGuest):
-                ?>
-                <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
-                    <p>Join now and get updated with all the properties deals.</p>
-                    <button class="btn btn-info"   data-toggle="modal" data-target="#loginpop">Login</button>
-                </div>
-                <?
+                    ?>
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
+                        <p>Join now and get updated with all the properties deals.</p>
+                        <button class="btn btn-info"   data-toggle="modal" data-target="#loginpop">Login</button>        </div>
+                    <?
                 endif;
                 ?>
-
             </div>
         </div>
     </div>
@@ -144,10 +117,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="image-holder"><img src="<?=Common::getImageAdvert($row)[0] ?>"  class="img-responsive" alt="properties"/>
                         <div class="status <?=($row['sold']) ? 'sold' : 'new' ?>"><?=Common::getType($row) ?></div>
                     </div>
-                    <h4><a href="" ><?=Common::getTitleAdvert($row) ?></a></h4>
+                    <h4><a href="<?=\yii\helpers\Url::to('front/front/view-advert?id='.$row['id']) ?>" ><?=Common::getTitleAdvert($row) ?></a></h4>
                     <p class="price">Price: $<?=$row['price'] ?></p>
                     <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><?=$row['bedroom'] ?></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><?=$row['livingroom'] ?></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><?=$row['parking'] ?></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen"><?=$row['kitchen'] ?></span> </div>
-                    <a class="btn btn-primary" href="" >View Details</a>
+                    <a class="btn btn-primary" href="<?=\yii\helpers\Url::to('front/front/view-advert?id='.$row['id']) ?>" >View Details</a>
                 </div>
 
                 <?
@@ -196,9 +169,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="row">
                                     <div class="col-lg-4"><img src="<?=Common::getImageAdvert($rec)[0] ?>"  class="img-responsive" alt="properties"/></div>
                                     <div class="col-lg-8">
-                                        <h5><a href="" ><?=Common::getTitleAdvert($rec) ?></a></h5>
+                                        <h5><a href="<?=\yii\helpers\Url::to('front/front/view-advert?id='.$rec['id']) ?>" ><?=Common::getTitleAdvert($rec) ?></a></h5>
                                         <p class="price">$<?=$rec['price'] ?></p>
-                                        <a href=""  class="more">More Detail</a> </div>
+                                        <a href="<?=\yii\helpers\Url::to('front/front/view-advert?id='.$rec['id']) ?>"  class="more">More Detail</a> </div>
                                 </div>
                             </div>
                             <?

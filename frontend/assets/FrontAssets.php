@@ -25,6 +25,8 @@ class FrontAssets extends AssetBundle {
         'source/slitslider/js/jquery.ba-cond.min.js',
         'source/slitslider/js/jquery.slitslider.js',
         //'source/js/google_analytics_auto.js'
+        
+
     ];
     public $depends = [
         'yii\web\YiiAsset',
