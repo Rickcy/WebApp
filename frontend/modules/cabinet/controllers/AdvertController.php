@@ -98,6 +98,11 @@ class AdvertController extends AuthController
             $model->general_image = $name;
             $model->save();
 
+            
+            
+            
+            
+            
             $size = getimagesize($image);
             $width = $size[0];
             $height = $size[1];
