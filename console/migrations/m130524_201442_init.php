@@ -24,6 +24,34 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+        
+        $this->createTable('{{%advert}}',[
+            'id'=>$this->primaryKey(),
+            'price'=>$this->integer(),
+            'address'=>$this->string(),
+            'fk_agent_detail'=>$this->integer(),
+            'bedroom'=>$this->integer(),
+            'livingroom'=>$this->integer(),
+            'parking'=>$this->integer(),
+            'kitchen'=>$this->integer(),
+            'general_image'=>$this->string(),
+            'description'=>$this->text(),
+            'location'=>$this->string(),
+            'hot'=>$this->integer(),
+            'sold'=>$this->integer(),
+            'type'=>$this->string(),
+            'recomend'=>$this->integer(),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+        ],$tableOptions);
+
+        $this->createTable('{{%subscribe}}',[
+            'id'=>$this->primaryKey(),
+            'email'=>$this->string(),
+            'date_subscribe' => $this->timestamp(),
+        ],$tableOptions);
+
+
     }
 
     public function down()

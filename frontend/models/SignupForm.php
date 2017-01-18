@@ -3,6 +3,7 @@ namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
+use yii\helpers\Url;
 
 /**
  * Signup form
@@ -13,7 +14,7 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $repassword;
-
+    public $verifyCode;
     /**
      * @inheritdoc
      */
@@ -34,6 +35,7 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
             ['repassword', 'compare','compareAttribute'=>'password'],
+            ['verifyCode', 'captcha','captchaAction'=>Url::to(['/front/front/captcha'])],
         ];
     }
 
@@ -53,7 +55,11 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+        $user->save();
+       if ($user->save()){
+           return $user;
+       }
+        return null;
+
     }
 }

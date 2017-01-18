@@ -104,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <!-- banner -->
 <div class="container">
-    <div class="properties-listing spacer"> <a href="buysalerent.html"  class="pull-right viewall">View All Listing</a>
+    <div class="properties-listing spacer"> <a href="<?=\yii\helpers\Url::to('front/front/show') ?>"  class="pull-right viewall">View All Listing</a>
         <h2>Featured Properties</h2>
         <div id="owl-example" class="owl-carousel">
 

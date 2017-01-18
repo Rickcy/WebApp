@@ -89,9 +89,11 @@ class AdvertController extends AuthController
             $model->scenario = 'step2';
 
             $file = UploadedFile::getInstance($model,'general_image');
+           
+            
             $name = 'general.'.$file->extension;
             $file->saveAs($path .DIRECTORY_SEPARATOR .$name);
-
+            
             $image  = $path .DIRECTORY_SEPARATOR .$name;
             $new_name = $path .DIRECTORY_SEPARATOR."small_".$name;
 

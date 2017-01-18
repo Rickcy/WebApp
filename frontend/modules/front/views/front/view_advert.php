@@ -25,12 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <!-- Indicators -->
                         <ol class="carousel-indicators hidden-xs">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <?
+                            <?if (count($images)>1):
                             foreach(range(1,count($images) - 1) as $s):
                                 ?>
                                 <li data-target="#myCarousel" data-slide-to="<?=$s ?>" class=""></li>
                             <?
                             endforeach;
+                            endif;
                             ?>
                         </ol>
                         <div class="carousel-inner">

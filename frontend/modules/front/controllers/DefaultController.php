@@ -20,7 +20,7 @@ class DefaultController extends Controller
         $this->layout = "front";
         $query = new Query();
         $query_advert = $query->from('advert')->orderBy('id desc');
-        $command = $query_advert->limit(5);
+        $command = $query_advert->limit(5);   
         $result_general = $command->all();
         $count_general = $command->count();
 

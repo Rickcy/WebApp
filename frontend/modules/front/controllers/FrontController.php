@@ -47,7 +47,7 @@ class FrontController extends Controller
 
     public function actionFind($propert='',$price='',$apartment = ''){
 
-        $this->layout = 'sell';
+        $this->layout = 'inner';
 
         $query = Advert::find();
         $query->filterWhere(['like', 'address', $propert])
@@ -81,9 +81,13 @@ class FrontController extends Controller
 
     public function actionRegister(){
         $model = new SignupForm();
-        if($model->load(Yii::$app->request->post()) && $model->signup()){
-                $this->goBack();
-            Yii::$app->session->setFlash('success','Register Success');
+        if($model->load(Yii::$app->request->post())){
+            
+            $user =$model->signup();
+            if (Yii::$app->getUser()->login($user)) {
+                return $this->redirect('/cabinet/advert/');
+            }
+
         }else {
             return $this->render('register', ['model' => $model]);
         }
@@ -117,6 +121,19 @@ class FrontController extends Controller
             die();
         }
         return $this->render('contact',['model'=>$model]);
+    }
+
+
+    public function actionShow(){
+        $advert = Advert::find();
+        $countQuery = clone $advert;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $pages->setPageSize(10);
+
+        $advert = $advert->offset($pages->offset)->limit($pages->limit)->all();
+        return $this->render('show_all',[
+            'advert'=>$advert,'pages'=>$pages
+        ]);
     }
 
     public function actionViewAdvert($id){

@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use Faker\Provider\DateTime;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -82,6 +83,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
+       
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

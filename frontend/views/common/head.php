@@ -21,19 +21,8 @@ use yii\bootstrap\Nav;
 
             <!-- Nav Starts -->
             <div class="navbar-collapse  collapse">
-                <?
-                
-                $menuItems = [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                ];
-                echo Nav::widget([
-                    'options' => ['class' => 'navbar-nav navbar-right'],
-                    'items' => $menuItems,
-                ]);
-                ?>
-           
+
+
             </div>
             <!-- #Nav Ends -->
 
@@ -51,12 +40,13 @@ use yii\bootstrap\Nav;
 
 <!-- Header Starts -->
     <div class="header">
+        <div class="navbar-collapse  collapse">
         <a href="/" ><img src="/images/logo.png"  alt="Realestate"></a>
         <?
         $menuItems = [];
         $guest = Yii::$app->user->isGuest;
         if($guest) {
-            $menuItems[] =  ['label' => 'Login', 'url' => '#', 'linkOptions' => ['data-target' => '#loginpop', 'data-toggle' => "modal"]];
+            $menuItems[] =  ['label' => 'Sign Up', 'url' => ['/front/front/register']];
         }
         else{
             $menuItems[] =  ['label' => 'Manager adverts', 'url' => ['/cabinet/advert']];
@@ -64,9 +54,11 @@ use yii\bootstrap\Nav;
         }
         echo Nav::widget([
             'options' => ['class' => 'pull-right'],
+            
             'items' => $menuItems,
         ]);
         ?>
     </div>
+        </div>
 <!-- #Header Starts -->
 </div>
